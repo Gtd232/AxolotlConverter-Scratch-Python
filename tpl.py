@@ -10,6 +10,21 @@ pygame.init()
 screen = pygame.display.set_mode(({{width}}, {{height}}))
 pygame.display.set_caption("{{title}}")
 
+background = pygame.image.load('bg.png')
+
+class Sprite:
+    def __init__(self, name, x, y, ):
+        self.name = name
+        self.x = x
+        self.y = y
+    
+
+class Stage:
+    def __init__(self, bg):
+        self.bg = bg
+
+{{main_program1}}
+
 # 游戏循环
 while True:
     for event in pygame.event.get(): # 循环遍历事件
@@ -17,4 +32,5 @@ while True:
             pygame.quit()
             sys.exit()
 
+    screen.blit(background, (0, 0))
     pygame.display.update()
