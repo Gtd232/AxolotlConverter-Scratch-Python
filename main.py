@@ -17,8 +17,8 @@ def make(file_json,encoding='utf-8',screenWidth=480,screenHeight=360,title='Axol
     for i in file_json['targets']:
         if i['isStage'] != True:
             main_program1 += '''
-            {} = Sprite('{}', {}, {})
-            '''.format(i['name'], i['name'], i['x'], i['y']).replace('    ', '')
+            spriteDic['{}'] = Sprite('{}', {}, {}, {})
+            '''.format(i['name'], i['name'], i['x'], i['y'], i['layerOrder']).replace('    ', '')
 
     with open(r'./output/main.py', 'w', encoding=encoding) as f:
         f.write(file_head

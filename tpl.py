@@ -13,15 +13,18 @@ pygame.display.set_caption("{{title}}")
 background = pygame.image.load('bg.png')
 
 class Sprite:
-    def __init__(self, name, x, y, ):
+    def __init__(self, name, x, y, layerOrder):
         self.name = name
         self.x = x
         self.y = y
+        self.layerOrder = layerOrder
     
 
 class Stage:
     def __init__(self, bg):
         self.bg = bg
+
+spriteDic = {}
 
 {{main_program1}}
 
