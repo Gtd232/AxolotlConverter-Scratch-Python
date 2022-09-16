@@ -7,8 +7,9 @@ import sys
 
 # 初始化
 pygame.init()
-
-screen = pygame.display.set_mode(({{width}}, {{height}}))
+screenWidth = {{width}}
+screenHeight = {{height}}
+screen = pygame.display.set_mode((screenWidth, screenHeight))
 pygame.display.set_caption("{{title}}")
 
 background = pygame.image.load('bg.png')
@@ -47,5 +48,5 @@ while True:
     for i in range(len(spriteDic) + 1):
         for j in spriteDic:
             if spriteDic[j].layerOrder == i:
-                screen.blit(pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)], (0,0))
+                screen.blit(pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)], (screenWidth / 2 - pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)].get_rect().size[0] / 2, screenHeight / 2 - pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)].get_rect().size[1] / 2))
     pygame.display.update()
