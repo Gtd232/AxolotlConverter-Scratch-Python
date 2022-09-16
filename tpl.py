@@ -48,5 +48,5 @@ while True:
     for i in range(len(spriteDic) + 1):
         for j in spriteDic:
             if spriteDic[j].layerOrder == i:
-                screen.blit(pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)], (screenWidth / 2 - abs(spriteDic[j].x) - pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)].get_rect().size[0] / 2, screenHeight / 2 - abs(spriteDic[j].y) - pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)].get_rect().size[1] / 2))
+                screen.blit(pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)], (screenWidth / 2 + spriteDic[j].x - pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)].get_rect().size[0] / 2, screenHeight / 2 - spriteDic[j].y - pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)].get_rect().size[1] / 2))
     pygame.display.update()
