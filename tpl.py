@@ -7,17 +7,26 @@ import sys
 
 # 初始化
 pygame.init()
+
 screen = pygame.display.set_mode(({{width}}, {{height}}))
 pygame.display.set_caption("{{title}}")
 
 background = pygame.image.load('bg.png')
 
+pics = {}
+
 class Sprite:
-    def __init__(self, name, x, y, layerOrder):
+    def __init__(self, name, x, y, layerOrder, currentCostume, costumes):
         self.name = name
         self.x = x
         self.y = y
         self.layerOrder = layerOrder
+        self.currentCostume = currentCostume
+        self.costumes = costumes
+        j = 0
+        for i in costumes:
+            pics['{}-{}'.format(name, str(j))] = pygame.image.load(i['md5ext'])
+            j += 1
     
 
 class Stage:
@@ -34,6 +43,9 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-
     screen.blit(background, (0, 0))
+    for i in range(len(spriteDic) + 1):
+        for j in spriteDic:
+            if spriteDic[j].layerOrder == i:
+                screen.blit(pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)], (0,0))
     pygame.display.update()
