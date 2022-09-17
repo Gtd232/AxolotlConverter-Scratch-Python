@@ -26,7 +26,7 @@ class Sprite:
         self.costumes = costumes
         j = 0
         for i in costumes:
-            pics['{}-{}'.format(name, str(j))] = pygame.image.load(i['md5ext'])
+            pics['{}-{}'.format(name, str(j))] = pygame.transform.scale(pygame.image.load(i['md5ext']), (pygame.image.load(i['md5ext']).get_rect().size[0] / 2, pygame.image.load(i['md5ext']).get_rect().size[1] / 2))
             j += 1
     
 
