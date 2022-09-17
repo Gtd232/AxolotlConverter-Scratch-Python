@@ -26,7 +26,7 @@ class Sprite:
         self.costumes = costumes
         j = 0
         for i in costumes:
-            pics['{}-{}'.format(name, str(j))] = pygame.transform.scale(pygame.image.load(i['md5ext']), (pygame.image.load(i['md5ext']).get_rect().size[0] / 2, pygame.image.load(i['md5ext']).get_rect().size[1] / 2))
+            pics['{}-{}'.format(name, str(j))] = [pygame.transform.scale(pygame.image.load(i['md5ext']), (pygame.image.load(i['md5ext']).get_rect().size[0] / 2, pygame.image.load(i['md5ext']).get_rect().size[1] / 2)), i['rotationCenterX'], i['rotationCenterY']]
             j += 1
     
 
@@ -48,5 +48,5 @@ while True:
     for i in range(len(spriteDic) + 1):
         for j in spriteDic:
             if spriteDic[j].layerOrder == i:
-                screen.blit(pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)], (screenWidth / 2 + spriteDic[j].x - pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)].get_rect().size[0] / 2, screenHeight / 2 - spriteDic[j].y - pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)].get_rect().size[1] / 2))
+                screen.blit(pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)][0], (screenWidth / 2 + spriteDic[j].x - pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)][0].get_rect().size[0] / 2, screenHeight / 2 - spriteDic[j].y - pics['{}-{}'.format(spriteDic[j].name, spriteDic[j].currentCostume)][0].get_rect().size[1] / 2))
     pygame.display.update()
