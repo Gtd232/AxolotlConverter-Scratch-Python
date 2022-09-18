@@ -16,20 +16,12 @@ def make(file_json,encoding='utf-8',screenWidth=480,screenHeight=360,title='Axol
         os.system(r'mkdir -p output')
         os.system(r'cp ./assets/bg.png ./output/bg.png')
 
-    main_program1 = ''''''
-
-    for i in file_json['targets']:
-        if i['isStage'] != True:
-            main_program1 += '''
-            spriteDic['{}'] = Sprite('{}', {}, {}, {}, {}, {})
-            '''.format(i['name'], i['name'], i['x'], i['y'], i['layerOrder'], i['currentCostume'],i['costumes']).replace('    ', '')
-
     with open(r'./output/main.py', 'w', encoding=encoding) as f:
         f.write(file_head
             .replace('{{width}}', str(screenWidth))
             .replace('{{height}}', str(screenHeight))
             .replace('{{title}}', title)
-            .replace('{{main_program1}}', main_program1))
+            .replace('{{project_json}}', str(file_json)))
 
     
 
