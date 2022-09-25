@@ -1,4 +1,4 @@
-name: TFGS
+name: Mirror to Gitee Repo
 
 on:
   schedule:
@@ -7,22 +7,24 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  git-mirror:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Clone
-      run: |
-        git clone https://git.jetbrains.space/gtrees/acsp/AxolotlConverter-Scratch-Python.git
-    - name: Upload
-      uses: crazy-max/ghaction-github-pages@v2.6.0
-      with:
-        build_dir: AxolotlConverter-Scratch-Python
-        target_branch: master
-        verbose: true
-        commit_message: Upload
-        keep_history: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.D }}
+      - name: Configure Private Key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SPACE_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "StrictHostKeyChecking no" >> ~/.ssh/config
+      - name: Push Mirror
+        env:
+          SOURCE_REPO: 'https://git.jetbrains.space/gtrees/acsp/AxolotlConverter-Scratch-Python.git'
+          DESTINATION_REPO: 'git@git.jetbrains.space/gtrees/acsp/AxolotlConverter-Scratch-Python.git'
+        run: |
+          git clone --mirror "$SOURCE_REPO" && cd `basename "$SOURCE_REPO"`
+          git remote set-url --push origin "$DESTINATION_REPO"
+          git fetch -p origin
+          git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
+          git push --mirror
