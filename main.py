@@ -34,8 +34,8 @@ def make(file_json,encoding='utf-8',screenWidth=480,screenHeight=360,title='Axol
                     '''.format(i['variables'][j][0], i['variables'][j][1]).replace('    ', '')
                 elif isinstance(i['variables'][j][1],str):
                     main_program1 += '''
-                    pvars['global']['{}'] = '{}'
-                    '''.format(i['variables'][j][0], i['variables'][j][1]).replace('    ', '')
+                    pvars['global']['{}'] = {name: {}, value: {}}
+                    '''.format(i['variables'][j], i['variables'][j][0], i['variables'][j][1]).replace('    ', '')
 
 
     with open(r'./output/main.py', 'w', encoding=encoding) as f:
