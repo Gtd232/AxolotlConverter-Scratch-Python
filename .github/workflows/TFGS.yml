@@ -24,7 +24,7 @@ jobs:
       - name: Push Mirror
         env:
           SOURCE_REPO: 'https://git.jetbrains.space/gtrees/acsp/AxolotlConverter-Scratch-Python.git'
-          DESTINATION_REPO: 'git@git.jetbrains.space/gtrees/acsp/AxolotlConverter-Scratch-Python.git'
+          DESTINATION_REPO: 'ssh://git@git.jetbrains.space/gtrees/acsp/AxolotlConverter-Scratch-Python.git'
         run: |
           git clone --mirror "$DESTINATION_REPO" && cd 'basename "$DESTINATION_REPO"'
           git remote set-url --push origin "$DESTINATION_REPO"
