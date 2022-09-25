@@ -2,7 +2,7 @@ name: TFGS
 
 on:
   schedule:
-    - cron: '30 0 * * 3,6'
+    - cron: '0 0 * * 0'
 
 jobs:
   build:
