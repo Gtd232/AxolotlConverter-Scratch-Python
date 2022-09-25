@@ -1,0 +1,26 @@
+name: TFGS
+
+on:
+  schedule:
+    - cron: '30 0 * * 3,6'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Clone
+      run: |
+        git clone https://git.jetbrains.space/gtrees/acsp/AxolotlConverter-Scratch-Python.git
+    - name: Upload
+      uses: crazy-max/ghaction-github-pages@v2.6.0
+      with:
+        build_dir: AxolotlConverter-Scratch-Python
+        target_branch: master
+        verbose: true
+        commit_message: Upload
+        keep_history: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.D }}
