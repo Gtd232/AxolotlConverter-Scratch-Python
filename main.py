@@ -29,7 +29,7 @@ def make(file_json,encoding='utf-8',screenWidth=480,screenHeight=360,title='Axol
         if i['name'] == 'Stage':
             for j in i['variables']:
                 main_program1 += '''
-                pvars['global']['{}'] = {name: {}, value: {}}
+                pvars['{}'] = {name: {}, value: {}}
                 '''.format(i['variables'][j], i['variables'][j][0], i['variables'][j][1]).replace('    ', '')
 
 
