@@ -16,7 +16,7 @@ background = pygame.image.load('bg.png')
 
 pics = {}
 
-pvars = {'global': {}}
+pvars = {}
 
 class Sprite:
     def __init__(self, name, x, y, layerOrder, currentCostume, costumes):
@@ -31,6 +31,9 @@ class Sprite:
             pics['{}-{}'.format(name, str(j))] = [pygame.transform.scale(pygame.image.load(i['md5ext']), (pygame.image.load(i['md5ext']).get_rect().size[0] / 2, pygame.image.load(i['md5ext']).get_rect().size[1] / 2)), i['rotationCenterX'], i['rotationCenterY'], pygame.image.load(i['md5ext']).get_rect().size[0], pygame.image.load(i['md5ext']).get_rect().size[1]]
             # 图像 rotationCenterX rotationCenterY Width Height   
             j += 1
+    
+    def data_setvariableto(self, inputs, fields):
+        pvars[fields['VAEIABLE'][1]] = inputs['VALUE'][1][1]
     
 
 class Stage:
