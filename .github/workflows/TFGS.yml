@@ -13,17 +13,20 @@ jobs:
       - name: Configure Private Key
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SPACE_PRIVATE_KEY }}
+          DD: ${{ secrets.DD }}
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          echo "$DD" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa.pub
+          chmod 600 ~/.ssh/id_rsa.pub
           echo "StrictHostKeyChecking no" >> ~/.ssh/config
       - name: Push Mirror
         env:
           SOURCE_REPO: 'https://git.jetbrains.space/gtrees/acsp/AxolotlConverter-Scratch-Python.git'
           DESTINATION_REPO: 'git@git.jetbrains.space/gtrees/acsp/AxolotlConverter-Scratch-Python.git'
         run: |
-          git clone --mirror "$DESTINATION_REPO" && cd `basename "$DESTINATION_REPO"`
+          git clone --mirror "$DESTINATION_REPO" && cd 'basename "$DESTINATION_REPO"'
           git remote set-url --push origin "$DESTINATION_REPO"
           git fetch -p origin
           git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
