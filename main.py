@@ -23,6 +23,20 @@ def make(file_json,encoding='utf-8',screenWidth=480,screenHeight=360,title='Axol
             main_program1 += '''
             spriteDic['{}'] = Sprite('{}', {}, {}, {}, {}, {})
             '''.format(i['name'], i['name'], i['x'], i['y'], i['layerOrder'], i['currentCostume'],i['costumes']).replace('    ', '')
+    
+    # vars
+    for i in file_json['targets']:
+        if i['name'] == 'Stage':
+            for j in i['variables']:
+                if isinstance(i['variables'][j][1],int):
+                    main_program1 += '''
+                    pvars['global']['{}'] = {}
+                    '''.format(i['variables'][j][0], i['variables'][j][1]).replace('    ', '')
+                elif isinstance(i['variables'][j][1],str):
+                    main_program1 += '''
+                    pvars['global']['{}'] = '{}'
+                    '''.format(i['variables'][j][0], i['variables'][j][1]).replace('    ', '')
+
 
     with open(r'./output/main.py', 'w', encoding=encoding) as f:
         f.write(file_head

@@ -16,6 +16,8 @@ background = pygame.image.load('bg.png')
 
 pics = {}
 
+pvars = {'global': {}}
+
 class Sprite:
     def __init__(self, name, x, y, layerOrder, currentCostume, costumes):
         self.name = name
