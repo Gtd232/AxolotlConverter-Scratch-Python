@@ -6,8 +6,9 @@ import os
 import zipfile
 import json
 
-def make(file_json,encoding='utf-8',screenWidth=480,screenHeight=360,title='Axolotl Application'):
-    with open(r'tpl.py', 'r',encoding=encoding) as f:
+
+def make(file_json, encoding='utf-8', screenWidth=480, screenHeight=360, title='Axolotl Application'):
+    with open(r'tpl.py', 'r', encoding=encoding) as f:
         file_head = f.read()
     if os.name == 'nt':
         os.system(r'mkdir output')
@@ -22,8 +23,9 @@ def make(file_json,encoding='utf-8',screenWidth=480,screenHeight=360,title='Axol
         if i['isStage'] != True:
             main_program1 += '''
             spriteDic['{}'] = Sprite('{}', {}, {}, {}, {}, {})
-            '''.format(i['name'], i['name'], i['x'], i['y'], i['layerOrder'], i['currentCostume'],i['costumes']).replace('    ', '')
-    
+            '''.format(i['name'], i['name'], i['x'], i['y'], i['layerOrder'], i['currentCostume'],
+                       i['costumes']).replace('    ', '')
+
     # vars
     for i in file_json['targets']:
         if i['name'] == 'Stage':
@@ -32,24 +34,24 @@ def make(file_json,encoding='utf-8',screenWidth=480,screenHeight=360,title='Axol
                 pvars['{}'] = {name: {}, value: "{}"}
                 '''.format(i['variables'][j], i['variables'][j][0], i['variables'][j][1]).replace('    ', '')
 
-
     with open(r'./output/main.py', 'w', encoding=encoding) as f:
         f.write(file_head
-            .replace('{{width}}', str(screenWidth))
-            .replace('{{height}}', str(screenHeight))
-            .replace('{{title}}', title)
-            .replace('{{main_program1}}', main_program1))
+                .replace('{{width}}', str(screenWidth))
+                .replace('{{height}}', str(screenHeight))
+                .replace('{{title}}', title)
+                .replace('{{main_program1}}', main_program1))
 
-    
 
 def unzip(filepath):
     f = zipfile.ZipFile(filepath, 'r')
-    if os.name == 'nt':os.system(r'mkdir temp') 
-    else:os.system(r'mkdir -p temp')
+    if os.name == 'nt':
+        os.system(r'mkdir temp')
+    else:
+        os.system(r'mkdir -p temp')
     f.extractall('temp')
+
 
 if __name__ == '__main__':
     unzip('input.sb3')
     with open('./temp/project.json', 'r') as f:
         make(json.loads(f.read()))
-
