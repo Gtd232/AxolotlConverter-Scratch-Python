@@ -1,4 +1,4 @@
-name: Mirror to Gitee Repo
+name: Mirror to Space Repo
 
 on:
   schedule:
@@ -23,7 +23,7 @@ jobs:
           SOURCE_REPO: 'https://git.jetbrains.space/gtrees/acsp/AxolotlConverter-Scratch-Python.git'
           DESTINATION_REPO: 'git@git.jetbrains.space/gtrees/acsp/AxolotlConverter-Scratch-Python.git'
         run: |
-          git clone --mirror "$SOURCE_REPO" && cd `basename "$SOURCE_REPO"`
+          git clone --mirror "$DESTINATION_REPO" && cd `basename "$DESTINATION_REPO"`
           git remote set-url --push origin "$DESTINATION_REPO"
           git fetch -p origin
           git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
