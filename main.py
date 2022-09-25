@@ -28,14 +28,9 @@ def make(file_json,encoding='utf-8',screenWidth=480,screenHeight=360,title='Axol
     for i in file_json['targets']:
         if i['name'] == 'Stage':
             for j in i['variables']:
-                if isinstance(i['variables'][j][1],int):
-                    main_program1 += '''
-                    pvars['global']['{}'] = {}
-                    '''.format(i['variables'][j][0], i['variables'][j][1]).replace('    ', '')
-                elif isinstance(i['variables'][j][1],str):
-                    main_program1 += '''
-                    pvars['global']['{}'] = {name: {}, value: {}}
-                    '''.format(i['variables'][j], i['variables'][j][0], i['variables'][j][1]).replace('    ', '')
+                main_program1 += '''
+                pvars['global']['{}'] = {name: {}, value: {}}
+                '''.format(i['variables'][j], i['variables'][j][0], i['variables'][j][1]).replace('    ', '')
 
 
     with open(r'./output/main.py', 'w', encoding=encoding) as f:
