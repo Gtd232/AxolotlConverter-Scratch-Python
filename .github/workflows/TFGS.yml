@@ -26,7 +26,7 @@ jobs:
           SOURCE_REPO: 'https://github.com/Gtd232/AxolotlConverter-Scratch-Python.git'
           DESTINATION_REPO: 'ssh://git@git.jetbrains.space/gtrees/acsp/AxolotlConverter-Scratch-Python.git'
         run: |
-          git clone --mirror "$SOURCE_REPO" && cd AxolotlConverter-Scratch-Python
+          git clone --mirror "$SOURCE_REPO" && cd `basename "$SOURCE_REPO"`
           git remote set-url --push origin "$DESTINATION_REPO"
           git fetch -p origin
           git for-each-ref --format 'delete %(refname)' refs/pull | git update-ref --stdin
