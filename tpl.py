@@ -13,7 +13,7 @@ cfg = {
     'title': '{{title}}',
 }
 
-project = {{project_json}}
+
 
 # 初始化
 pygame.init()
@@ -52,12 +52,7 @@ class Stage:
         self.bg = bg
 
 
-spriteDic = {}
-
-for i in project['targets']:
-    if i['isStage'] != True:
-        spriteDic[i['name']] = Sprite(i['name'], i['x'], i['y'], i['layerOrder'], i['currentCostume'], i['costumes'])
-
+{{main_program1}}
 
 # 游戏循环
 while True:

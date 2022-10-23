@@ -30,9 +30,13 @@ def make(file_json, encoding='utf-8', screenWidth=480, screenHeight=360, title='
     for i in file_json['targets']:
         if i['name'] == 'Stage':
             for j in i['variables']:
-                main_program1 += '''
-                pvars['{}'] = {name: {}, value: "{}"}
-                '''.format(i['variables'][j], i['variables'][j][0], i['variables'][j][1]).replace('    ', '')
+                main_program1 += 'pvars[\'%s\'] = {\'name\': %s, \'value\': "%s"}' % (i['variables'][j], i['variables'][j][0], i['variables'][j][1])
+    
+    for i in file_json['targets']:
+        for j in i['blocks']:
+            if i['blocks'][j]['opcode'] == "event_whenflagclicked" and bool(i['blocks'][j]['next']):
+                main_program1 += '\ndef func%s():\n' % ''.join([bin(ord(c)).replace('0b', '') for c in j])
+
 
     with open(r'./output/main.py', 'w', encoding=encoding) as f:
         f.write(file_head
