@@ -30,7 +30,7 @@ def make(file_json, encoding='utf-8', screenWidth=480, screenHeight=360, title='
     for i in file_json['targets']:
         if i['name'] == 'Stage':
             for j in i['variables']:
-                main_program1 += 'pvars[\'%s\'] = {\'name\': %s, \'value\': "%s"}' % (i['variables'][j], i['variables'][j][0], i['variables'][j][1])
+                main_program1 += 'pvars[\'%s\'] = {\'name\': %s, \'value\': "%s"}' % (j, i['variables'][j][0], i['variables'][j][1])
     
     for i in file_json['targets']:
         for j in i['blocks']:
