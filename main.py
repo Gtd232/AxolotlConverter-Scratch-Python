@@ -36,6 +36,10 @@ def make(file_json, encoding='utf-8', screenWidth=480, screenHeight=360, title='
         for j in i['blocks']:
             if i['blocks'][j]['opcode'] == "event_whenflagclicked" and bool(i['blocks'][j]['next']):
                 main_program1 += '\ndef func%s():\n' % ''.join([bin(ord(c)).replace('0b', '') for c in j])
+                current_opcode = i['blocks'][j]['next']
+                while current_opcode != None:
+                    main_program1 += '    %s(%s, %s)' % (i['blocks'][current_opcode]['opcode'], i['blocks'][current_opcode]['inputs'], i['blocks'][current_opcode]['fields'])
+                    current_opcode = i['blocks'][current_opcode]['next']
 
 
     with open(r'./output/main.py', 'w', encoding=encoding) as f:
